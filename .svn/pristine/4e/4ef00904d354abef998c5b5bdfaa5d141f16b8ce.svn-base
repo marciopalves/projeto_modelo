@@ -1,0 +1,44 @@
+package br.com.escola.dao.impl;
+
+import java.util.List;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import br.com.escola.bean.Escola;
+import br.com.escola.dao.EscolaDaoI;
+
+@Repository
+public class EscolaDao implements EscolaDaoI {
+
+	@Autowired
+	private SessionFactory session;
+
+	@Transactional
+	public void insert(Escola e) {
+		session.getCurrentSession().persist(e);
+	}
+
+	@Transactional
+	public void delete(Escola e) {
+		session.getCurrentSession().delete(e);
+
+	}
+
+	@Transactional
+	public void update(Escola e) {
+		session.getCurrentSession().update(e);
+
+	}
+
+	@Transactional
+	public List<Escola> select() {
+		List<Escola> list = session.getCurrentSession()
+				.createCriteria(Escola.class).list();
+		return list;
+	}
+
+}

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/tags">
+
+<body>
+	<ui:composition>
+
+
+
+		<div id="topo"></div>
+
+
+		<p:menubar autoDisplay="false">
+			<p:submenu label="Arquivo" icon="ui-icon-document">
+				<p:menuitem value="Alterar senha" url="senha.jsf" />
+				<p:menuitem value="Usuarios" url="user.jsf" />
+				<p:menuitem value="Sair" url="#{request.contextPath}/j_spring_security_logout" />
+			</p:submenu>
+
+			<p:submenu label="Cadastrar" icon="ui-icon-document">
+				<p:menuitem value="Aluno" url="aluno.jsf" />
+				<p:menuitem value="Escala" url="escola.jsf" />
+				<p:menuitem value="Curso" url="curso.jsf" />
+				<p:menuitem value="Professor" url="professor.jsf" />
+			</p:submenu>
+
+		
+			
+			<p:submenu label="Controle de acesso">
+				<p:menuitem value="Cadastrar Permiss&atilde;o" url="c_authority.jsf" />
+				<p:menuitem value="Atribuir Permiss&atilde;o" url="a_authority.jsf" />
+			</p:submenu>
+		</p:menubar>
+
+	</ui:composition>
+</body>
+</html>
+
+

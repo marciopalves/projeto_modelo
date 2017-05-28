@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+    					http://www.springframework.org/schema/security 
+    					http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+
+
+
+	<security:http auto-config="true" use-expressions="true">
+
+		<security:intercept-url pattern="/material.jsf"
+			access="hasAnyRole('ROLE_ADMIN, ROLE_RH')" />
+
+
+
+		<security:intercept-url pattern="/login"
+			access="permitAll" />
+
+		<security:intercept-url pattern="/index.jsf"
+			access="hasAnyRole('ROLE_ADMIN, ROLE_RH, ROLE_COLABORADOR')" />
+
+		<security:intercept-url pattern="/evento.jsf"
+			access="hasAnyRole('ROLE_ADMIN, ROLE_COLABORADOR')" />
+
+		<security:intercept-url pattern="/carro.jsf"
+			access="hasAnyRole('ROLE_ADMIN, ROLE_RH')" />
+
+		<security:intercept-url pattern="/produto.jsf"
+			access="hasAnyRole('ROLE_ADMIN, ROLE_COLABORADOR')" />
+
+		<security:intercept-url pattern="/senha.jsf"
+			access="hasAnyRole('ROLE_ADMIN')" />
+
+		<security:intercept-url pattern="/user_authority.jsf"
+			access="hasAnyRole('ROLE_ADMIN')" />
+
+
+
+
+
+
+
+
+		<security:form-login login-page="/login.jsf"
+			authentication-failure-url="/login.jsf?error=true" />
+		<security:logout logout-success-url="/login.jsf" />
+	</security:http>
+
+	<!-- INSERT INTO usuario VALUES ('rh', true, md5('123')); INSERT INTO usuario 
+		VALUES ('colaborador', true, md5('1234')); INSERT INTO authority VALUES ('ROLE_RH'); 
+		INSERT INTO authority VALUES ('ROLE_COLABORADOR'); INSERT INTO auth_authority 
+		VALUES ('rh','ROLE_RH', 1); INSERT INTO auth_authority VALUES ('colaborador','ROLE_COLABORADOR', 
+		1); INSERT INTO usuario VALUES ('admin', true, md5('admin')); INSERT INTO 
+		authority VALUES ('ROLE_ADMIN'); INSERT INTO auth_authority VALUES ('admin','ROLE_ADMIN', 
+		1); -->
+
+
+	<security:authentication-manager alias="authenticationManager">
+
+		<security:authentication-provider>
+			<security:password-encoder hash="md5" />
+			<security:jdbc-user-service
+				data-source-ref="dataSource"
+				users-by-username-query="SELECT username, password, enable FROM usuario WHERE username= ?"
+				authorities-by-username-query="SELECT  user_username AS username,  auth_authority AS authority FROM auth_authority WHERE user_username = ?" />
+
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+</beans>

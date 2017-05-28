@@ -1,0 +1,14 @@
+#DATABASE CONFIGURATIONS PostgresSQL
+jdbc.driverClassName=org.postgresql.Driver
+jdbc.url=jdbc:postgresql://localhost:5433/java
+jdbc.username=postgres
+jdbc.password=123456
+
+
+#HIBERNATE CONFIGURATIONS PostgresSQL
+hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+hibernate.show_sql=true
+hibernate.format_sql=true
+hibernate.hbm2ddl.auto=none
+hibernate.package=br.com.escola.bean
+
